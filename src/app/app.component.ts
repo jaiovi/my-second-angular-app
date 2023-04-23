@@ -16,7 +16,7 @@ export class AppComponent {
   seleAlumno:Alumno=new Alumno();
   
   addOrEdit(){
-    if(this.seleAlumno.id==0){
+    if(this.seleAlumno.id==0){ //crea uno nuevo
       this.seleAlumno.id=this.alumnosArray.length+1;
       this.alumnosArray.push(this.seleAlumno);
     }
@@ -28,6 +28,11 @@ export class AppComponent {
   } //aqui toma y actualiza el dato
 
   delete(){
-    
+    if(confirm("¿Deseas eliminar alumno seleccionado?"))
+    {
+      //busca registro pa eliminar
+      this.alumnosArray=this.alumnosArray.filter(x=> x!=this.seleAlumno);
+      this.seleAlumno = new Alumno();
+    }
   }
 }

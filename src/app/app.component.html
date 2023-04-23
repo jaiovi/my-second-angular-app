@@ -14,7 +14,9 @@
   
   <div class="col-md-8 mt-4">
     <ul class="list-group">
-      <li [class.active] *ngFor="let al of alumnosArray" class="list-group-item list-group-item-action">
+      <li *ngFor="let al of alumnosArray" class="list-group-item list-group-item-action"
+      (click)="openForEdit(al)"
+      [class.active]="al==seleAlumno">
         <span class="badge bg-danger">{{al.id}}</span> {{al.nombre}} - {{al.grado}}
       </li>
     </ul>
@@ -30,7 +32,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let al of alumnosArray">
+          <tr *ngFor="let al of alumnosArray"
+          (click)="openForEdit(al)"
+          [class.active]="al==seleAlumno"
+          >
             <td>{{al.id}}</td>
             <td>{{al.nombre}}</td>
             <td>{{al.grado}}</td>
@@ -44,10 +49,14 @@
           <div class="card-title">Inserta un nuevo alumno</div>
 
           <div class="form-group mb-3">
-            <input [(ngModel)]="seleAlumno.nombre" type="text" placeholder="Ingrese el nombre">
+            <input [(ngModel)]="seleAlumno.nombre" type="text" class="form-control mb-2" placeholder="Ingrese el nombre">
+            <input [(ngModel)]="seleAlumno.grado" type="number" class="form-control mb-2" placeholder="Ingrese el grado">
+            <input [(ngModel)]="seleAlumno.edad" type="number" class="form-control mb-2" placeholder="Ingrese el edad">
           </div>
 
-          <button class="btn btn-primary">Agregar</button>
+          <button *ngIf="seleAlumno.id===0" (click)="addOrEdit()" class="btn btn-primary">Agregar</button>
+          <button *ngIf="seleAlumno.id!==0" (click)="addOrEdit()" class="btn btn-warning">Modificar</button>
+          <button *ngIf="seleAlumno.id!==0" (click)="delete()" class="btn btn-danger ms-3">Eliminar</button>
           <div class="form-groug"></div>
         </div>
       </div>
