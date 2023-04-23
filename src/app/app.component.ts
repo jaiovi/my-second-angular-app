@@ -14,6 +14,7 @@ export class AppComponent {
   ]
 
   seleAlumno:Alumno=new Alumno();
+  
   addOrEdit(){
     if(this.seleAlumno.id==0){
       this.seleAlumno.id=this.alumnosArray.length+1;
